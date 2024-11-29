@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: url(https://esnz-reactweather.netlify.app/static/media/bg.6eb21da7.svg);
+  background: linear-gradient(rgb(249, 255, 255) 0%, rgb(56, 200, 230) 100%);
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+
+.App {
+  max-width: 960px;
+  width: 100%;
+  margin: auto;
+  padding: 0 16px;
+}
