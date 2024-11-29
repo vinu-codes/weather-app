@@ -2,26 +2,29 @@ import React, { useState, useEffect } from 'react'
 
 type ButtonProps = {
   style: React.CSSProperties
-  onClick: () => void
   // calculate: (a: number, b: number) => number
   children: React.ReactNode
 }
 
-const Button = ({ style, onClick, children }: ButtonProps) => {
-  return (
-    <button style={style} onClick={onClick}>
-      {children}
-    </button>
-  )
-}
+// const Button = ({ style, onClick, children }: ButtonProps) => {
+//   return (
+//     <button style={style} onClick={onClick}>
+//       {children}
+//     </button>
+//   )
+// }
 
 const SearchBar = () => {
-  const handleClick = () => {}
+  const [value, setValue] = useState('')
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    console.log({ name, value })
+  }
 
   return (
     <div>
-      Search
-      <Button
+      {/* <Button
         style={{
           backgroundColor: 'red',
           color: 'white',
@@ -33,7 +36,8 @@ const SearchBar = () => {
         // calculate={(a, b) => a * b}
       >
         Hello
-      </Button>
+      </Button> */}
+      <input value={value} onChange={handleChange} />
     </div>
   )
 }
