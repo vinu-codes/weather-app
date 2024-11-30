@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { data } from '@state/weather'
+// import { fetchWeatherData } from '@state/weather'
+import * as weather from '@state/weather/index'
+import { AppDispatch } from '@state/store'
 
-type ButtonProps = {
-  style: React.CSSProperties
-  // calculate: (a: number, b: number) => number
-  children: React.ReactNode
-}
-
-// const Button = ({ style, onClick, children }: ButtonProps) => {
-//   return (
-//     <button style={style} onClick={onClick}>
-//       {children}
-//     </button>
-//   )
-// }
+console.log(weather)
 
 const SearchBar = () => {
   const [value, setValue] = useState('')
+  const dispatch = useDispatch<AppDispatch>()
+
+  useEffect(() => {
+    // dispatch(fetchWeatherData({ city: 'london' }))
+  }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -24,19 +22,6 @@ const SearchBar = () => {
 
   return (
     <div>
-      {/* <Button
-        style={{
-          backgroundColor: 'red',
-          color: 'white',
-          padding: '10px',
-          border: 'none',
-          borderRadius: '5px',
-        }}
-        onClick={handleClick}
-        // calculate={(a, b) => a * b}
-      >
-        Hello
-      </Button> */}
       <input value={value} onChange={handleChange} />
     </div>
   )
