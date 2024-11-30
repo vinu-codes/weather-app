@@ -12,13 +12,14 @@ A simple weather app built with React, TypeScript, Redux, and the OpenWeather AP
 - Converts temperature from Kelvin to Celsius.
 - Responsive design for mobile and desktop users.
 
-## Technologies Used
+## Technologies Used & learnings
 
 - **React**: Front-end framework for building the user interface.
 - **TypeScript**: Type-safe JavaScript for better development experience.
 - **Redux**: State management for handling asynchronous data fetching.
 - **OpenWeather API**: External API for fetching weather data.
 - **Tailwind CSS**: Utility-first CSS framework for styling the app.
+- **Postman** was used for API testing
 
 ## Getting Started
 
