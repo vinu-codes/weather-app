@@ -3,11 +3,13 @@ import './styles.css'
 import { store } from './state/store'
 import { Provider } from 'react-redux'
 import { SearchBar } from '@components/SearchBar/SearchBar'
+import { CurrentWeather } from '@components/CurrentWeather/CurrentWeather'
+import { Forecast } from 'components/Forecast/Forecast'
 
 function App() {
   return (
     <Provider store={store}>
-      <div className="App">
+      <div className="App flex flex-col gap-5">
         <header className="flex h-24 items-end justify-between">
           <h1 className="font-bold text-4xl">Weather App</h1>
           <div>Github Link</div>
@@ -15,6 +17,8 @@ function App() {
         <div className="search-bar">
           <SearchBar />
         </div>
+        <CurrentWeather />
+        <Forecast />
         <footer>
           Developed by Vinu
           <a

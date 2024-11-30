@@ -12,7 +12,6 @@ export const getWeatherByCity = async (city: string) => {
         units: 'metric',
       },
     })
-    console.log({ response: response.data })
     return response.data
   } catch (error: unknown) {
     console.log(error, 'error from getWeatherByCity')
@@ -29,7 +28,6 @@ export const getExtendedWeatherByCity = async (city: string) => {
         cnt: 6,
       },
     })
-    console.log({ response: response.data })
     return response.data
   } catch (error: unknown) {
     console.log(error, 'error from getExtendedWeather')
