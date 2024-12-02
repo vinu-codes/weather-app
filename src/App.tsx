@@ -20,13 +20,13 @@ function App() {
         <CurrentWeather />
         <Forecast />
         <footer className="text-center">
-          Developed by Vinu
+          Developed by{' '}
           <a
             href="https://v-codes.io/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Portfolio
+            Vinu
           </a>
         </footer>
       </div>

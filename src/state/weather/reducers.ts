@@ -1,17 +1,30 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { getWeatherByCity, getExtendedWeatherByCity } from '../../services'
 import { transformWeather } from '../../utils/transformWeather'
-import { ExtendedWeatherData } from '../../services/types'
+import { ExtendedWeatherData, WeatherData } from '../../services/types'
 
 type WeatherState = {
-  currentWeather: {}
+  currentWeather: WeatherData
   extendedWeather: ExtendedWeatherData[]
   loading: boolean
   error: null
 }
 
 const initialState: WeatherState = {
-  currentWeather: {},
+  currentWeather: {
+    city: '',
+    weather: {
+      temp: 0,
+      humidity: 0,
+      description: '',
+      icon: '',
+      id: 0,
+      wind: {
+        deg: 0,
+        speed: 0,
+      },
+    },
+  },
   extendedWeather: [],
   loading: false,
   error: null,
