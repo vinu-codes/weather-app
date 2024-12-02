@@ -1,14 +1,18 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { getWeatherByCity, getExtendedWeatherByCity } from '../../services'
+import { transformWeather } from '../../utils/transformWeather'
+import { ExtendedWeatherData } from '../../services/types'
 
 type WeatherState = {
-  data: []
+  currentWeather: {}
+  extendedWeather: ExtendedWeatherData[]
   loading: boolean
   error: null
 }
 
 const initialState: WeatherState = {
-  data: [],
+  currentWeather: {},
+  extendedWeather: [],
   loading: false,
   error: null,
 }
@@ -20,7 +24,10 @@ export const fetchWeatherData = createAsyncThunk(
     { rejectWithValue, fulfillWithValue, dispatch },
   ) => {
     try {
-      const response = await getWeatherByCity(city)
+      const response = await Promise.all([
+        getWeatherByCity(city),
+        getExtendedWeatherByCity(city),
+      ])
       return response
     } catch (error) {
       return rejectWithValue(error || 'an error occured')
@@ -37,14 +44,15 @@ const weatherSlice = createSlice({
       state.loading = true
     })
     builder.addCase(fetchWeatherData.fulfilled, (state, { payload }) => {
-      console.log({payload})
-      //
+      console.log({ payload })
+      const result = transformWeather(payload)
+      state.currentWeather = result.weather
+      state.extendedWeather = result.forecast
     })
     builder.addCase(fetchWeatherData.rejected, (state, { payload }) => {
       state.loading = false
     })
   },
 })
-
 
 export default weatherSlice.reducer

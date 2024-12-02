@@ -19,7 +19,7 @@ function App() {
         </div>
         <CurrentWeather />
         <Forecast />
-        <footer>
+        <footer className="text-center">
           Developed by Vinu
           <a
             href="https://v-codes.io/"

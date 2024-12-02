@@ -25,7 +25,7 @@ export const getExtendedWeatherByCity = async (city: string) => {
         q: city,
         appid: API_KEY,
         units: 'metric',
-        cnt: 6,
+        cnt: 8,
       },
     })
     return response.data

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { data as weatherData } from '@state/weather'
+import { currentWeather, extendedWeather } from '@state/weather'
 import { fetchWeatherData } from '@state/weather'
 import { AppDispatch } from '@state/store'
 import { useSelector } from 'react-redux'
@@ -9,7 +9,7 @@ import searchSvg from '../../assets/search.svg'
 const SearchBar = () => {
   const [value, setValue] = useState('')
   const dispatch = useDispatch<AppDispatch>()
-  const data = useSelector(weatherData)
+  const weather = useSelector(currentWeather)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target
@@ -31,7 +31,7 @@ const SearchBar = () => {
         onChange={handleChange}
         name="search-input"
         value={value}
-        className="block bg-white w-full focus:outline-none focus:border-sky-500 rounded-2xl"
+        className="block bg-white w-full focus:outline-none focus:border-sky-500 pl-4"
       />
     </form>
   )
