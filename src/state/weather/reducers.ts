@@ -57,7 +57,6 @@ const weatherSlice = createSlice({
       state.loading = true
     })
     builder.addCase(fetchWeatherData.fulfilled, (state, { payload }) => {
-      console.log({ payload })
       const result = transformWeather(payload)
       state.currentWeather = result.weather
       state.extendedWeather = result.forecast

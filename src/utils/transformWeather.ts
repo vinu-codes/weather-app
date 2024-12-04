@@ -1,38 +1,60 @@
 import { WeatherData, ExtendedWeatherData } from 'services/types'
 
+type WeatherItem = {
+  date: string;
+  [key: string]: any; 
+}
+
+const uniqueByDate = (weatherArray: WeatherItem[]) => {
+  console.log({weatherArray})
+  const seenDates: Record<string, boolean> = {}
+
+  const result = weatherArray.filter((item)=>{
+    const dateKey = item.date.split(' ')[0]
+    if (seenDates[dateKey]) {
+      return false;
+    } 
+    seenDates[dateKey] = true
+    return true
+  })
+  return result
+}
+
 // create extendedWeather array
-export const createExtendedWeatherStructure = (
-    extended: any,
-  ): ExtendedWeatherData[] => {
-    if (!extended?.list) return []
-    const result = extended.list.map((item: any)=>({
-        date: item.dt_txt,
-        description: item.weather[0]?.description,
-        icon: item.weather[0]?.icon,
-        id: item.weather[0]?.id,
-        temp: item.main?.temp,
-    }))
-    return result as ExtendedWeatherData[]
-  }
-  
+export const createExtendedWeatherStructure = (extended: any): ExtendedWeatherData[] => {
+
+  if (!extended?.list) return []
+  const result = extended.list.map((item: any) => ({
+    date: item.dt_txt,
+    description: item.weather[0]?.description,
+    icon: item.weather[0]?.icon,
+    id: item.weather[0]?.id,
+    temp: item.main?.temp,
+  }))
+
+  const filteredArray = uniqueByDate(result)
+  console.log({filteredArray})
+  return filteredArray as ExtendedWeatherData[]
+}
+
 // create currentWeather object
-  export const createCurrentWeatherStructure = (current: any): WeatherData => {
-    // Implement the function to return WeatherData
-    return {
-      city: current.name || 'Sydney',
-      weather: {
-        temp: current.main?.temp || 0,
-        humidity: current.main.humidity,
-        description: current.weather[0]?.description,
-        icon: current.weather[0]?.icon,
-        id: current.weather[0]?.id,
-        wind: {
-          deg: current.wind?.deg,
-          speed: current.wind?.speed,
-        },
+export const createCurrentWeatherStructure = (current: any): WeatherData => {
+  // Implement the function to return WeatherData
+  return {
+    city: current.name || 'Sydney',
+    weather: {
+      temp: current.main?.temp || 0,
+      humidity: current.main.humidity,
+      description: current.weather[0]?.description,
+      icon: current.weather[0]?.icon,
+      id: current.weather[0]?.id,
+      wind: {
+        deg: current.wind?.deg,
+        speed: current.wind?.speed,
       },
-    }
-  }  
+    },
+  }
+}
 
 // transform data
 export const transformWeather = (
@@ -42,12 +64,8 @@ export const transformWeather = (
 
   const currentWeather = createCurrentWeatherStructure(current)
   const extendedWeather = createExtendedWeatherStructure(extended)
-
-  console.log({currentWeather, extendedWeather})
-
   return {
     weather: currentWeather,
     forecast: extendedWeather,
   }
 }
-
