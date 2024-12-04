@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { getWeatherByCity, getExtendedWeatherByCity } from '../../services'
 import { transformWeather } from '../../utils/transformWeather'
 import { ExtendedWeatherData, WeatherData } from '../../services/types'
+import { setIsInitial } from '@state/app'
 
 type WeatherState = {
   currentWeather: WeatherData
@@ -41,6 +42,7 @@ export const fetchWeatherData = createAsyncThunk(
         getWeatherByCity(city),
         getExtendedWeatherByCity(city),
       ])
+      dispatch(setIsInitial(true))
       return response
     } catch (error) {
       return rejectWithValue(error || 'an error occured')

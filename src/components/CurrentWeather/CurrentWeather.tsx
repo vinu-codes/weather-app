@@ -2,12 +2,16 @@ import React from 'react'
 import WeatherIcon from './WeatherIcon'
 import { useSelector } from 'react-redux'
 import { currentWeather } from '@state/weather'
+import { isInitial } from '@state/app'
 import directionImg from '../../assets/weather/direction.png'
 import humid from '../../assets/weather/humid.png'
 import wind from '../../assets/weather/wind.png'
 
 const CurrentWeather = () => {
   const weather = useSelector(currentWeather)
+  const isAppInitialised = useSelector(isInitial)
+
+  if (!isAppInitialised) return <></>
 
   return (
     <div className="bg-white w-full rounded-2xl flex flex-col p-12">

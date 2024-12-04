@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { extendedWeather } from '@state/weather'
+import { isInitial } from '@state/app'
 
 type WeatherCard = {
   date: string
@@ -30,6 +31,10 @@ const convertTime = (time: string) => {
 
 const Forecast = () => {
   const weather = useSelector(extendedWeather) as WeatherCard[]
+
+  const isAppInitialised = useSelector(isInitial)
+
+  if (!isAppInitialised) return <></>
 
   const renderCards = (weather: WeatherCard[]) => {
     return weather.map((item, index) => {
