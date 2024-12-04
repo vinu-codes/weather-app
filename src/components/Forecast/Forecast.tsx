@@ -32,9 +32,9 @@ const Forecast = () => {
   const weather = useSelector(extendedWeather) as WeatherCard[]
 
   const renderCards = (weather: WeatherCard[]) => {
-    return weather.map((item) => {
+    return weather.map((item, index) => {
       return (
-        <div className="card">
+        <div className="card max-w-32 min-w-32" key={index}>
           <span className="text-large font-semibold text-neutral-500 text-black">
             {convertTime(item.date)}
           </span>
@@ -49,8 +49,8 @@ const Forecast = () => {
   }
   return (
     <div className="bg-white w-full rounded-2xl flex flex-col p-12 text-neutral-500 font-semibold text-lg">
-      Extended Weather - 7 days
-      <div className="flex flex-wrap gap-8">{renderCards(weather)}</div>
+      <span className="pb-4">Extended Weather - 5 days</span>
+      <div className="flex flex-wrap gap-2">{renderCards(weather)}</div>
     </div>
   )
 }

@@ -1,19 +1,26 @@
 import { WeatherData, ExtendedWeatherData } from 'services/types'
 
 type WeatherItem = {
-  date: string;
-  [key: string]: any; 
+  date: string
+  [key: string]: any
+}
+
+// remove from array the first item
+const removeFirstItem = (filteredArray: any) => {
+  const result = filteredArray.filter((_: any, index: number) => {
+    return index !== 0
+  })
+  return result
 }
 
 const uniqueByDate = (weatherArray: WeatherItem[]) => {
-  console.log({weatherArray})
   const seenDates: Record<string, boolean> = {}
 
-  const result = weatherArray.filter((item)=>{
+  const result = weatherArray.filter((item) => {
     const dateKey = item.date.split(' ')[0]
     if (seenDates[dateKey]) {
-      return false;
-    } 
+      return false
+    }
     seenDates[dateKey] = true
     return true
   })
@@ -21,8 +28,9 @@ const uniqueByDate = (weatherArray: WeatherItem[]) => {
 }
 
 // create extendedWeather array
-export const createExtendedWeatherStructure = (extended: any): ExtendedWeatherData[] => {
-
+export const createExtendedWeatherStructure = (
+  extended: any,
+): ExtendedWeatherData[] => {
   if (!extended?.list) return []
   const result = extended.list.map((item: any) => ({
     date: item.dt_txt,
@@ -33,8 +41,8 @@ export const createExtendedWeatherStructure = (extended: any): ExtendedWeatherDa
   }))
 
   const filteredArray = uniqueByDate(result)
-  console.log({filteredArray})
-  return filteredArray as ExtendedWeatherData[]
+  const finalArray = removeFirstItem(filteredArray)
+  return finalArray as ExtendedWeatherData[]
 }
 
 // create currentWeather object
