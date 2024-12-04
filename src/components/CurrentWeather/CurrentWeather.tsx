@@ -17,7 +17,7 @@ const CurrentWeather = () => {
       <div className="flex">
         <div className="left-panel flex flex-col flex-1">
           <span className="text-large font-semibold">{weather?.city}</span>
-          <div className="flex items-center">
+          <div className="flex items-center pt-8">
             <WeatherIcon icon={weather.weather?.icon} />
             <span className="text-8xl font-semibold">
               {weather.weather?.temp}
